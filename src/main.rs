@@ -5,5 +5,5 @@ fn main() {
 
     let a = Matrix::new(rows);
 
-    a.print();
+    println!("{}", a.f1_score());
 }
