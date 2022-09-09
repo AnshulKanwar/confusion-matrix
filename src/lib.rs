@@ -1,18 +1,29 @@
-use nalgebra::ArrayStorage;
-use nalgebra::base::{Matrix, Const};
-
-pub fn get_tp(mat: &Matrix<i32, Const<2>, Const<2>, ArrayStorage<i32, 2, 2>>) -> i32 {
-    return mat.m11;
+pub struct Matrix {
+    pub size: usize,
+    pub rows: Vec<Vec<u32>>,
 }
 
-pub fn get_tn(mat: &Matrix<i32, Const<2>, Const<2>, ArrayStorage<i32, 2, 2>>) -> i32 {
-    return mat.m22;
-}
+impl Matrix {
+    pub fn new(rows: Vec<Vec<u32>>) -> Self {
+        let n_rows = rows.len();
+        let n_cols = rows[0].len();
 
-pub fn get_fp(mat: &Matrix<i32, Const<2>, Const<2>, ArrayStorage<i32, 2, 2>>) -> i32 {
-    return mat.m12;
-}
+        if n_rows != n_cols {
+            panic!("Not a square matrix")
+        }
 
-pub fn get_fn(mat: &Matrix<i32, Const<2>, Const<2>, ArrayStorage<i32, 2, 2>>) -> i32 {
-    return mat.m21;
+        Matrix {
+            size: n_rows,
+            rows: rows
+        }
+    }
+
+    pub fn print(&self) {
+        for row in &self.rows {
+            for col in row {
+                print!("{} ", col);
+            }
+            println!("");
+        }
+    }
 }
